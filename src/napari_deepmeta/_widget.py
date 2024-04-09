@@ -64,10 +64,25 @@ def show_shapes_3D(viewer, plottable, color, text):
     try:
         viewer.add_shapes(
             plottable,
-            shape_type="polygon",
+            shape_type="path",
             edge_width=0.5,
             edge_color=color,
             face_color="#6a6a6aff",
+            opacity=0.6,
+            name=text,
+        )
+    except Exception as e:
+        print(e)
+        print(np.shape(plottable))
+
+def show_shapes_3D_meta(viewer, plottable, color, text):
+    try:
+        viewer.add_shapes(
+            plottable,
+            shape_type="polygon",
+            edge_width=0.5,
+            edge_color=color,
+            face_color="color",
             opacity=0.6,
             name=text,
         )
@@ -128,7 +143,7 @@ class DeepmetaWidget(QWidget):
             if self.metas:
                 masks = [mask > 1.5 for mask in output]
                 plottable_list = df.mask_to_plottable_3D(masks)
-                show_shapes_3D(
+                show_shapes_3D_meta(
                     self.viewer, plottable_list, "blue", "Metastases masks"
                 )
                 show_total_vol(
