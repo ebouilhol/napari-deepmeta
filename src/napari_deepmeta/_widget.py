@@ -64,7 +64,7 @@ def show_shapes_3D(viewer, plottable, color, text):
     try:
         viewer.add_shapes(
             plottable,
-            shape_type="path",
+            shape_type="polygon",
             edge_width=0.5,
             edge_color=color,
             face_color="#6a6a6aff",
