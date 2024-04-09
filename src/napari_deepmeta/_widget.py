@@ -118,6 +118,9 @@ class DeepmetaWidget(QWidget):
         self.metas = False
         self.layout().addWidget(check3)
 
+    update_btn = QPushButton("Update values")
+    btn.clicked.connect(self._on_click_update)
+
     def _click_box(self, state):
         self.contrast = state == QtCore.Qt.Checked
 
@@ -159,7 +162,27 @@ class DeepmetaWidget(QWidget):
             show_error(
                 "Cannot run segmentation if you have multiple files opened."
             )
+            
+    def _on_click_update(self):
+        import napari_deepmeta.deepmeta_functions as df
 
+        if len(self.viewer.layers) == 1:
+
+
+                show_shapes_3D_meta(
+                    self.viewer, labels, "blue", "Metastases masks"
+                )
+                show_total_vol(
+                    self.layout(),
+                    np.array(masks),
+                    "metastases",
+                    nb=df.get_meta_nb(masks),
+                )
+            print("done")
+        else:
+            show_error(
+                "Cannot update values."
+            )
 
 class DeepmetaDemoWidget(QWidget):
     def __init__(self, napari_viewer):
