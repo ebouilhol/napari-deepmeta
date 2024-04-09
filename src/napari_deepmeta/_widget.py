@@ -82,7 +82,7 @@ def show_shapes_3D_meta(viewer, plottable, color, text):
             shape_type="polygon",
             edge_width=0.5,
             edge_color=color,
-            face_color="color",
+            face_color=color,
             opacity=0.6,
             name=text,
         )
@@ -185,7 +185,7 @@ class DeepmetaDemoWidget(QWidget):
         show_total_vol(self.layout(), np.array(masks), "lungs")
         masks = [mask > 1.5 for mask in output]
         plottable_list = df.mask_to_plottable_3D(masks)
-        show_shapes_3D(self.viewer, plottable_list, "blue", "Metastases masks")
+        show_shapes_3D_meta(self.viewer, plottable_list, "blue", "Metastases masks")
         show_total_vol(
             self.layout(),
             np.array(masks),
