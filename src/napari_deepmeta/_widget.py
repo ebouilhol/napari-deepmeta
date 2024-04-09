@@ -79,10 +79,12 @@ def show_shapes_3D_meta(viewer, plottable, color, text):
     try:
         viewer.add_labels(
             plottable,
-            shape_type="polygon",
-            edge_width=0.5,
-            edge_color=color,
-            face_color=color,
+            blending='translucent',
+            colormap=None,
+            # shape_type="polygon",
+            # edge_width=0.5,
+            # edge_color=color,
+            # face_color=color,
             opacity=0.6,
             name=text,
         )
