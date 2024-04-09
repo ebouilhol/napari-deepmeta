@@ -10,7 +10,7 @@ contributions:
       title: DeepmetaDemoWidget
 
   widgets:
-    - command: napari-deepmeta.make_qwidget
+    - command: napari_deepmeta.make_qwidget
       display_name: DeepmetaWidget
-    - command: napari-deepmeta.make_qwidget2
+    - command: napari_deepmeta.make_qwidget2
       display_name: DeepmetaDemoWidget
