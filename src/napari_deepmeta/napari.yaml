@@ -2,10 +2,10 @@ name: napari_deepmeta
 display_name: napari DeepMeta
 contributions:
   commands:
-    - id: napari-deepmeta.make_qwidget
+    - id: napari_deepmeta.make_qwidget
       python_name: napari_deepmeta._widget:DeepmetaWidget
       title: DeepmetaWidget
-    - id: napari-deepmeta.make_qwidget2
+    - id: napari_deepmeta.make_qwidget2
       python_name: napari_deepmeta._widget:DeepmetaDemoWidget
       title: DeepmetaDemoWidget
 
