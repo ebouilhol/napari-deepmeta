@@ -74,10 +74,10 @@ def show_shapes_3D(viewer, plottable, color, text):
     except Exception as e:
         print(e)
         print(np.shape(plottable))
-
+        
 def show_shapes_3D_meta(viewer, plottable, color, text):
     try:
-        viewer.add_shapes(
+        viewer.add_labels(
             plottable,
             shape_type="polygon",
             edge_width=0.5,
