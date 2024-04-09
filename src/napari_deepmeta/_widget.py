@@ -145,8 +145,8 @@ class DeepmetaWidget(QWidget):
             show_total_vol(self.layout(), np.array(masks), "lungs")
             if self.metas:
                 masks = [mask > 1.5 for mask in output]
-                labels = label(cleared)
-                plottable_list = df.mask_to_plottable_3D(masks)
+                labels = label(masks)
+                # plottable_list = df.mask_to_plottable_3D(masks)
                 show_shapes_3D_meta(
                     self.viewer, labels, "blue", "Metastases masks"
                 )
