@@ -1,4 +1,4 @@
-name: napari-deepmeta
+name: napari_deepmeta
 display_name: napari DeepMeta
 contributions:
   commands:
