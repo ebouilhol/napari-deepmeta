@@ -1,7 +1,6 @@
 from typing import TYPE_CHECKING
 
 import numpy as np
-from skimage.measure import label
 from qtpy import QtCore
 from qtpy.QtWidgets import (
     QCheckBox,
@@ -75,21 +74,6 @@ def show_shapes_3D(viewer, plottable, color, text):
     except Exception as e:
         print(e)
         print(np.shape(plottable))
-        
-def show_shapes_3D_meta(viewer, plottable, color, text):
-    try:
-        viewer.add_labels(
-            plottable,
-            # shape_type="path",
-            # edge_width=0.5,
-            # edge_color=color,
-            # face_color="#6a6a6aff",
-            # opacity=0.6,
-            name=text,
-        )
-    except Exception as e:
-        print(e)
-        print(np.shape(plottable))
 
 
 class DeepmetaWidget(QWidget):
@@ -118,9 +102,6 @@ class DeepmetaWidget(QWidget):
         self.metas = False
         self.layout().addWidget(check3)
 
-    update_btn = QPushButton("Update values")
-    btn.clicked.connect(self._on_click_update)
-
     def _click_box(self, state):
         self.contrast = state == QtCore.Qt.Checked
 
@@ -146,10 +127,9 @@ class DeepmetaWidget(QWidget):
             show_total_vol(self.layout(), np.array(masks), "lungs")
             if self.metas:
                 masks = [mask > 1.5 for mask in output]
-                labels = label(masks)
-                # plottable_list = df.mask_to_plottable_3D(masks)
-                show_shapes_3D_meta(
-                    self.viewer, labels, "blue", "Metastases masks"
+                plottable_list = df.mask_to_plottable_3D(masks)
+                show_shapes_3D(
+                    self.viewer, plottable_list, "blue", "Metastases masks"
                 )
                 show_total_vol(
                     self.layout(),
@@ -162,25 +142,7 @@ class DeepmetaWidget(QWidget):
             show_error(
                 "Cannot run segmentation if you have multiple files opened."
             )
-            
-    def _on_click_update(self):
-        import napari_deepmeta.deepmeta_functions as df
 
-        if len(self.viewer.layers) == 1:
-            show_shapes_3D_meta(
-                self.viewer, labels, "blue", "Metastases masks"
-            )
-            show_total_vol(
-                self.layout(),
-                np.array(masks),
-                "metastases",
-                nb=df.get_meta_nb(masks),
-            )
-            print("done")
-        else:
-            show_error(
-                "Cannot update values."
-            )
 
 class DeepmetaDemoWidget(QWidget):
     def __init__(self, napari_viewer):
@@ -208,7 +170,7 @@ class DeepmetaDemoWidget(QWidget):
         show_total_vol(self.layout(), np.array(masks), "lungs")
         masks = [mask > 1.5 for mask in output]
         plottable_list = df.mask_to_plottable_3D(masks)
-        show_shapes_3D_meta(self.viewer, plottable_list, "blue", "Metastases masks")
+        show_shapes_3D(self.viewer, plottable_list, "blue", "Metastases masks")
         show_total_vol(
             self.layout(),
             np.array(masks),
