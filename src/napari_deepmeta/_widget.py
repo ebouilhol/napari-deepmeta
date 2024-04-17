@@ -73,7 +73,7 @@ def show_shapes_3D(viewer, plottable, color, text):
         )
         labels = layer.to_labels([128,128])
         labels_layer = viewer.add_labels(labels, name=text)
-        labels_layer.visible = True
+        labels_layer.visible = False
         
     except Exception as e:
         print(e)
