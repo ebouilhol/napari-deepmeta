@@ -62,7 +62,7 @@ def show_error(text):
 
 def show_shapes_3D(viewer, plottable, color, text):
     try:
-        viewer.add_shapes(
+        layer = viewer.add_shapes(
             plottable,
             shape_type="path",
             edge_width=0.5,
