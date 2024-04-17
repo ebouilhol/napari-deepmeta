@@ -85,7 +85,7 @@ def show_shapes_3D_meta(viewer, plottable, color, text):
             # edge_color=color,
             # face_color="#6a6a6aff",
             # opacity=0.6,
-            # name=text,
+            name=text,
         )
     except Exception as e:
         print(e)
@@ -167,17 +167,15 @@ class DeepmetaWidget(QWidget):
         import napari_deepmeta.deepmeta_functions as df
 
         if len(self.viewer.layers) == 1:
-
-
-                show_shapes_3D_meta(
-                    self.viewer, labels, "blue", "Metastases masks"
-                )
-                show_total_vol(
-                    self.layout(),
-                    np.array(masks),
-                    "metastases",
-                    nb=df.get_meta_nb(masks),
-                )
+            show_shapes_3D_meta(
+                self.viewer, labels, "blue", "Metastases masks"
+            )
+            show_total_vol(
+                self.layout(),
+                np.array(masks),
+                "metastases",
+                nb=df.get_meta_nb(masks),
+            )
             print("done")
         else:
             show_error(
