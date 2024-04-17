@@ -78,14 +78,14 @@ def show_shapes_3D(viewer, plottable, color, text):
         
 def show_shapes_3D_meta(viewer, plottable, color, text):
     try:
-        viewer.add_shapes(
+        viewer.add_labels(
             plottable,
-            shape_type="path",
-            edge_width=0.5,
-            edge_color=color,
-            face_color="#6a6a6aff",
-            opacity=0.6,
-            name=text,
+            # shape_type="path",
+            # edge_width=0.5,
+            # edge_color=color,
+            # face_color="#6a6a6aff",
+            # opacity=0.6,
+            # name=text,
         )
     except Exception as e:
         print(e)
