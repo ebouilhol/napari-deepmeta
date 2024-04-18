@@ -107,8 +107,8 @@ class DeepmetaWidget(QWidget):
         self.layout().addWidget(check3)
 
         btn_update = QPushButton("Update stats")
-        btn_update.clicked.connect(sel._on_click_update)
-        sel.layout().addWidget(btn_update)
+        btn_update.clicked.connect(self._on_click_update)
+        self.layout().addWidget(btn_update)
         
 
     def _click_box(self, state):
