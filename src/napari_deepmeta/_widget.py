@@ -71,7 +71,7 @@ def show_shapes_3D(viewer, plottable, color, text):
             opacity=0.6,
             name=text,
         )
-        labels = layer.to_labels([128,128])
+        labels = layer.to_labels()
         # labels_layer = viewer.add_labels(labels, name=text)
         # labels_layer.visible = False
         
