@@ -69,10 +69,10 @@ def show_shapes_3D(viewer, plottable, color, text):
             edge_color=color,
             face_color="#6a6a6aff",
             opacity=0.6,
-            name="shape"+text,
+            name="masks_"+text,
         )
         labels = layer.to_labels()
-        labels_layer = viewer.add_labels(labels, name=text)
+        labels_layer = viewer.add_labels(labels, name="labels_"+text)
         # labels_layer.visible = False
         
     except Exception as e:
@@ -132,13 +132,13 @@ class DeepmetaWidget(QWidget):
             masks = [mask > 0.5 for mask in output]
             plottable_list = df.mask_to_plottable_3D(masks)
             clean_labels(self.layout())
-            show_shapes_3D(self.viewer, plottable_list, "red", "Lung masks")
+            show_shapes_3D(self.viewer, plottable_list, "red", "Lung")
             show_total_vol(self.layout(), np.array(masks), "lungs")
             if self.metas:
                 masks = [mask > 1.5 for mask in output]
                 plottable_list = df.mask_to_plottable_3D(masks)
                 show_shapes_3D(
-                    self.viewer, plottable_list, "blue", "Metastases masks"
+                    self.viewer, plottable_list, "blue", "Metastases"
                 )
                 show_total_vol(
                     self.layout(),
@@ -159,7 +159,7 @@ class DeepmetaWidget(QWidget):
         # import napari_deepmeta.deepmeta_functions as df
 
         if len(self.viewer.layers) >= 1:
-            print(self.viewer.layers)
+            print(self.viewer.layers.labels_Metastases)
 
 
 class DeepmetaDemoWidget(QWidget):
