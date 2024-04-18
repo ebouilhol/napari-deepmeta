@@ -69,7 +69,7 @@ def show_shapes_3D(viewer, plottable, color, text):
             edge_color=color,
             face_color="#6a6a6aff",
             opacity=0.6,
-            name=text,
+            name="shape"+text,
         )
         labels = layer.to_labels()
         labels_layer = viewer.add_labels(labels, name=text)
@@ -105,6 +105,11 @@ class DeepmetaWidget(QWidget):
         check3.stateChanged.connect(self._click_box3)
         self.metas = False
         self.layout().addWidget(check3)
+
+        btn_update = QPushButton("Update stats")
+        btn_update.clicked.connect(sel._on_click_update)
+        sel.layout().addWidget(btn_update)
+        
 
     def _click_box(self, state):
         self.contrast = state == QtCore.Qt.Checked
@@ -146,6 +151,15 @@ class DeepmetaWidget(QWidget):
             show_error(
                 "Cannot run segmentation if you have multiple files opened."
             )
+
+    def _on_click_update(self):
+        
+        # label_im = labels_layer.data
+
+        # import napari_deepmeta.deepmeta_functions as df
+
+        if len(self.viewer.layers) >= 1:
+            print(self.viewer.layers)
 
 
 class DeepmetaDemoWidget(QWidget):
