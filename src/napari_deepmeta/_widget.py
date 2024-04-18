@@ -68,6 +68,7 @@ def show_shapes_3D(viewer, plottable, color, text):
             edge_width=0.5,
             edge_color=color,
             face_color="#6a6a6aff",
+            visible=False,
             opacity=0.6,
             name="masks_"+text,
         )
