@@ -86,6 +86,8 @@ class DeepmetaWidget(QWidget):
         super().__init__()
         self.viewer = napari_viewer
 
+        self.setLayout(QVBoxLayout())
+
         check = QCheckBox("Contrast ?", self)
         check.stateChanged.connect(self._click_box)
         self.contrast = False
@@ -103,8 +105,6 @@ class DeepmetaWidget(QWidget):
 
         btn = QPushButton("Segment Stack")
         btn.clicked.connect(self._on_click)
-
-        self.setLayout(QVBoxLayout())
         self.layout().addWidget(btn)
 
         btn_update = QPushButton("Update stats")
