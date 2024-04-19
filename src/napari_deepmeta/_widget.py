@@ -167,12 +167,12 @@ class DeepmetaWidget(QWidget):
             mask_meta = np.where(meta_labels >=1, 1, meta_labels)
 
             clean_labels(self.layout())
-            show_total_vol(self.layout(), np.array(masks), "lungs")
+            show_total_vol(self.layout(), np.array(mask_lungs), "lungs")
             show_total_vol(
                 self.layout(),
-                np.array(bin_temp),
+                np.array(mask_meta),
                 "metastases",
-                nb=df.get_meta_nb(bin_temp),
+                nb=df.get_meta_nb(mask_meta),
             )
         else:
             show_error(
