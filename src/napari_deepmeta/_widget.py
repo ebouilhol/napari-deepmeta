@@ -73,7 +73,7 @@ def show_shapes_3D(viewer, plottable, color, text):
             name="masks_"+text,
         )
         labels = layer.to_labels()
-        labels_layer = viewer.add_labels(labels, name="labels_"+text)
+        labels_layer = viewer.add_labels(labels, name="Labels_"+text)
         # labels_layer.visible = False
         
     except Exception as e:
@@ -85,12 +85,6 @@ class DeepmetaWidget(QWidget):
     def __init__(self, napari_viewer):
         super().__init__()
         self.viewer = napari_viewer
-
-        btn = QPushButton("Segment Stack")
-        btn.clicked.connect(self._on_click)
-
-        self.setLayout(QVBoxLayout())
-        self.layout().addWidget(btn)
 
         check = QCheckBox("Contrast ?", self)
         check.stateChanged.connect(self._click_box)
@@ -106,6 +100,12 @@ class DeepmetaWidget(QWidget):
         check3.stateChanged.connect(self._click_box3)
         self.metas = False
         self.layout().addWidget(check3)
+
+        btn = QPushButton("Segment Stack")
+        btn.clicked.connect(self._on_click)
+
+        self.setLayout(QVBoxLayout())
+        self.layout().addWidget(btn)
 
         btn_update = QPushButton("Update stats")
         btn_update.clicked.connect(self._on_click_update)
@@ -133,7 +133,7 @@ class DeepmetaWidget(QWidget):
             masks = [mask > 0.5 for mask in output]
             plottable_list = df.mask_to_plottable_3D(masks)
             clean_labels(self.layout())
-            show_shapes_3D(self.viewer, plottable_list, "red", "Lung")
+            show_shapes_3D(self.viewer, plottable_list, "red", "Lungs")
             show_total_vol(self.layout(), np.array(masks), "lungs")
             if self.metas:
                 masks = [mask > 1.5 for mask in output]
@@ -158,10 +158,16 @@ class DeepmetaWidget(QWidget):
         import napari_deepmeta.deepmeta_functions as df
 
         if len(self.viewer.layers) >= 1:
-            temp  = self.viewer.layers["labels_Metastases"].data
-            bin_temp = np.where(temp >=1, 1, temp)
-            # meta_nb = df.get_meta_nb(bin_temp)
+
+            lungs_labels  = self.viewer.layers["Labels_Lungs"].data
+            
+            meta_labels  = self.viewer.layers["Labels_Metastases"].data
+            
+            mask_lungs = np.where(lungs_labels >=1, 1, lungs_labels)
+            mask_meta = np.where(meta_labels >=1, 1, meta_labels)
+
             clean_labels(self.layout())
+            show_total_vol(self.layout(), np.array(masks), "lungs")
             show_total_vol(
                 self.layout(),
                 np.array(bin_temp),
