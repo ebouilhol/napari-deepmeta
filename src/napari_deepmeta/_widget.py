@@ -160,7 +160,8 @@ class DeepmetaWidget(QWidget):
         # import napari_deepmeta.deepmeta_functions as df
 
         if len(self.viewer.layers) >= 1:
-            print(self.viewer.layers["labels_Metastases"].data)
+            temp  = self.viewer.layers["labels_Metastases"].data
+            print(temp.shape)
 
 
 class DeepmetaDemoWidget(QWidget):
