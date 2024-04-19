@@ -168,7 +168,7 @@ class DeepmetaWidget(QWidget):
             print(bin_temp)
             print(bin_temp.shape)
             meta_nb = df.get_meta_nb(bin_temp)
-            a = [0 if a_ > thresh else a_ for a_ in a]
+            # a = [0 if a_ > thresh else a_ for a_ in a]
             print(meta_nb)
 
 
