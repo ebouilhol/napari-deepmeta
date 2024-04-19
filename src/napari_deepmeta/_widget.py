@@ -163,6 +163,7 @@ class DeepmetaWidget(QWidget):
             temp  = self.viewer.layers["labels_Metastases"].data
             print(temp.shape)
             bin_temp = temp[temp>=1]=1
+            print(bin_temp.shape)
             meta_nb = df.get_meta_nb(bin_temp)
             print(meta_nb)
 
