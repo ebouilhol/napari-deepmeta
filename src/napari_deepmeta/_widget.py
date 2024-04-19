@@ -73,8 +73,7 @@ def show_shapes_3D(viewer, plottable, color, text):
             name="masks_"+text,
         )
         labels = layer.to_labels()
-        labels_layer = viewer.add_labels(labels, 
-                                         colormap=[color],
+        labels_layer = viewer.add_labels(labels,
                                          name="Labels_"+text)
         # labels_layer.visible = False
         
