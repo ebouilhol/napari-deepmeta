@@ -155,22 +155,23 @@ class DeepmetaWidget(QWidget):
 
     def _on_click_update(self):
         
-        # label_im = labels_layer.data
-
         import napari_deepmeta.deepmeta_functions as df
 
         if len(self.viewer.layers) >= 1:
             temp  = self.viewer.layers["labels_Metastases"].data
-            print(temp.shape)
-            # bin_temp = temp[temp>=1]=1
-            # bin_temp  = [1 if a_ >= 1 else a_ for a_ in temp]
             bin_temp = np.where(temp >=1, 1, temp)
-            print(bin_temp)
-            print(bin_temp.shape)
-            meta_nb = df.get_meta_nb(bin_temp)
-            # a = [0 if a_ > thresh else a_ for a_ in a]
-            print(meta_nb)
-
+            # meta_nb = df.get_meta_nb(bin_temp)
+            clean_labels(self.layout())
+            show_total_vol(
+                self.layout(),
+                np.array(bin_temp),
+                "metastases",
+                nb=df.get_meta_nb(bin_temp),
+            )
+        else:
+            show_error(
+                "Cannot run segmentation if you have multiple files opened."
+            )
 
 class DeepmetaDemoWidget(QWidget):
     def __init__(self, napari_viewer):
