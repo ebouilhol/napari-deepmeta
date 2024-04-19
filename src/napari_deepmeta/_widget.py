@@ -157,7 +157,7 @@ class DeepmetaWidget(QWidget):
         
         # label_im = labels_layer.data
 
-        # import napari_deepmeta.deepmeta_functions as df
+        import napari_deepmeta.deepmeta_functions as df
 
         if len(self.viewer.layers) >= 1:
             temp  = self.viewer.layers["labels_Metastases"].data
